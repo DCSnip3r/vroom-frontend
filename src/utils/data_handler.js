@@ -627,10 +627,10 @@ var centerMarker = function(type, id) {
 }
 
 var addJob = function(j) {
-  if (_getTasksSize() >= api.maxTaskNumber) {
-    alert('Number of tasks can\'t exceed ' + api.maxTaskNumber + '.');
-    return;
-  }
+  // if (_getTasksSize() >= api.maxTaskNumber) {
+  //   alert('Number of tasks can\'t exceed ' + api.maxTaskNumber + '.');
+  //   return;
+  // }
 
   if (_hasCapacity && !('delivery' in j) && !('pickup' in j)) {
     _hasCapacity = false;
@@ -825,6 +825,9 @@ var getSolution = function() {
 
 var markUnassigned = function(unassigned) {
   for (var i = 0; i < unassigned.length; ++i) {
+    if(!unassigned[i].type){
+      unassigned[i].type = 'job' 
+    }
     data.markers[unassigned[i].type][unassigned[i].id.toString()]
       .setStyle(LSetup.markerStyle.unassigned);
   }
